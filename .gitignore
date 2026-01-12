@@ -144,3 +144,6 @@ dist/
 .env
 firebase-key.json
 *.log
+register-global.js
+register.js
+.wrangler/
