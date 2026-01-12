@@ -3,7 +3,7 @@
 <div align="center">
 
 ![Status](https://img.shields.io/badge/status-ativo-success.svg)
-![License](https://img.shields.io/badge/license-Beerware-orange.svg)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 ![Node](https://img.shields.io/badge/node-24%2B-brightgreen.svg)
 ![Cloudflare](https://img.shields.io/badge/cloudflare-workers-f38020.svg)
 
