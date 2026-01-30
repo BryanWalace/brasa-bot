@@ -1,0 +1,10 @@
+name = "brasa-bot"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[build]
+upload.format = "modules"
+
+# Variáveis públicas
+[vars]
+DISCORD_APP_ID = "1460287315963285668"

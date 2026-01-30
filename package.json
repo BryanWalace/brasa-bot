@@ -19,11 +19,13 @@
   },
   "homepage": "https://github.com/BryanWalace/brasa-bot#readme",
   "devDependencies": {
+    "dotenv": "^17.2.3",
     "wrangler": "^4.58.0"
   },
   "dependencies": {
     "discord-interactions": "^4.4.0",
     "firebase": "^12.7.0",
-    "itty-router": "^5.0.22"
+    "itty-router": "^5.0.22",
+    "jose": "^6.1.3"
   }
 }

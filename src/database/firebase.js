@@ -124,3 +124,69 @@ export async function cancelEvent(env, eventId) {
     const snapshot = await getDoc(eventRef);
     return snapshot.data();
 }
+
+// ===== FUNÇÕES DE POLLS =====
+
+// 8. Função para criar uma enquete
+export async function createPoll(env, pollData) {
+    const db = getDb(env);
+    const docRef = await addDoc(collection(db, 'polls'), {
+        ...pollData,
+        created_at: new Date().toISOString(),
+        voters: [] // Array de IDs de quem já votou
+    });
+    return docRef.id;
+}
+
+// 9. Função para buscar uma enquete
+export async function getPoll(env, pollId) {
+    const db = getDb(env);
+    const docRef = doc(db, 'polls', pollId);
+    const snapshot = await getDoc(docRef);
+
+    if (snapshot.exists()) {
+        return snapshot.data();
+    }
+    return null;
+}
+
+// 10. Função para registrar voto
+export async function recordVote(env, pollId, userId, optionIndex) {
+    const db = getDb(env);
+    const pollRef = doc(db, 'polls', pollId);
+
+    const snapshot = await getDoc(pollRef);
+    if (!snapshot.exists()) return null;
+
+    const data = snapshot.data();
+
+    // Verificar se usuário já votou
+    if (data.voters && data.voters.includes(userId)) {
+        return null; // Já votou
+    }
+
+    // Incrementar voto na opção escolhida
+    const updatedVotes = [...data.votes];
+    updatedVotes[optionIndex] = (updatedVotes[optionIndex] || 0) + 1;
+
+    // Adicionar usuário à lista de votantes
+    const updatedVoters = [...(data.voters || []), userId];
+
+    await updateDoc(pollRef, {
+        votes: updatedVotes,
+        voters: updatedVoters
+    });
+
+    return { ...data, votes: updatedVotes, voters: updatedVoters };
+}
+
+// 11. Função para salvar referência da mensagem da enquete
+export async function savePollMessageRef(env, pollId, channelId, messageId) {
+    const db = getDb(env);
+    const pollRef = doc(db, 'polls', pollId);
+
+    await updateDoc(pollRef, {
+        channel_id: channelId,
+        message_id: messageId
+    });
+}

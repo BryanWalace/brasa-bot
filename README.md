@@ -1,297 +1,279 @@
-# 🔥 Brasa Bot - Gerenciador de Churrasco Serverless
+# 🔥 Brasa Bot
 
-<div align="center">
-
-![Status](https://img.shields.io/badge/status-ativo-success.svg)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
-![Node](https://img.shields.io/badge/node-24%2B-brightgreen.svg)
-![Cloudflare](https://img.shields.io/badge/cloudflare-workers-f38020.svg)
-
-**Um bot de Discord completo para organizar churrascos e eventos entre amigos, com geração automática de PIX e gestão financeira em tempo real.**
-
-</div>
+**O gerenciador definitivo de churrascos** - Organize, convide e gerencie eventos de churrasco com integração Discord e pagamentos via PIX.
 
 ---
 
-## � Sobre o Projeto
+## 📋 Sobre o Projeto
 
-O **Brasa Bot** é um bot de Discord open-source que facilita a organização de churrascos, festas e eventos entre amigos. Ele roda 100% na **borda (Edge)** usando **Cloudflare Workers**, sem necessidade de servidores ligados 24h, e utiliza **Firebase Firestore** para persistência de dados. Oferece integração nativa com **PIX** para pagamentos simplificados.
-
-### 🎯 Por que usar o Brasa Bot?
-
-- ✅ **Zero Infraestrutura:** Serverless completo, sem custos de servidor
-- ✅ **Pagamentos Facilitados:** Gera códigos "Pix Copia e Cola" (Padrão EMV) automaticamente
-- ✅ **Gestão Inteligente:** Painel exclusivo para o organizador controlar quem pagou
-- ✅ **Multi-Servidor:** Funciona em quantos servidores Discord você quiser simultaneamente
-- ✅ **Open Source:** Código aberto, personalizável e gratuito
-
----
-
-## ✨ Funcionalidades
-
-### 🎪 Criação de Eventos com `/brasa novo`
-Crie eventos completos com um único comando:
-- **Título:** Nome do evento (ex: "Churras de Fim de Ano")
-- **Data:** Quando vai acontecer (ex: "20/12 às 14h")
-- **Valor:** Quanto cada pessoa vai pagar (opcional)
-- **Chave PIX:** Sua chave para receber os pagamentos (opcional)
-
-### 👥 Presença em Tempo Real
-- Botões interativos **"Vou"** e **"Não Vou"** para confirmar presença
-- Lista de confirmados atualizada automaticamente
-- Contador de participantes em tempo real
-
-### 💰 Geração Nativa de PIX Copia e Cola (Padrão EMV)
-- Botão **"Pagar"** gera o código Pix oficial dos bancos brasileiros
-- Implementação do padrão EMV QRCPS-MPM completo
-- Valor já preenchido, basta colar no app do banco
-- Mensagem efêmera (apenas quem clica visualiza o código)
-
-### 👑 Painel do Dono (Gerenciar/Cancelar)
-- Botão **"Gerenciar"** exclusivo para quem criou o evento
-- Menu dropdown para marcar quem já pagou (adiciona ícone 💲)
-- Opção de cancelar/encerrar o evento
-- Ao cancelar, o card é atualizado e as interações são bloqueadas
-
-### 🌐 Arquitetura Serverless
-- Roda 100% no Cloudflare Workers (Edge Computing)
-- Sistema de "Defer" para evitar timeouts do Discord
-- Funciona globalmente em múltiplos servidores
-- Escalabilidade automática sem configuração
+Brasa Bot é uma plataforma completa para organização de churrascos, combinando:
+- 🎯 **Interface Web moderna** com Next.js 14
+- 🤖 **Bot Discord integrado** para notificações e comandos
+- 💰 **Sistema de pagamentos PIX** automatizado
+- 📊 **Churrascômetro** para cálculo de quantidades
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Tecnologia | Uso |
-|------------|-----|
-| **Cloudflare Workers** | Hospedagem serverless na borda (Edge Computing) |
-| **Firebase Firestore Lite** | Banco de dados NoSQL para eventos e participantes |
-| **Node.js v24+** | Runtime moderno com `fetch` nativo |
-| **Discord Interactions API** | Slash Commands, Buttons, Select Menus |
-| **Wrangler** | CLI para deploy e gerenciamento de secrets |
+### Frontend
+- **Next.js 14** (App Router)
+- **React 18**
+- **CSS Modules** (Design system customizado)
+
+### Backend & Infraestrutura
+- **Cloudflare Workers** (Discord OAuth Bridge + API)
+- **Firebase Authentication** (Email/Senha + Custom Tokens)
+- **Firebase Firestore** (Banco de dados NoSQL)
+- **Discord.js** (Bot commands)
+
+### Autenticação
+- Discord OAuth 2.0 (via Worker)
+- Firebase Email/Password
+- Custom Token Bridge (Worker → Firebase)
 
 ---
 
-## 🚀 Instalação
+## ✅ Funcionalidades Implementadas
+
+### Autenticação
+- [x] Login Social com Discord (OAuth via Cloudflare Worker)
+- [x] Login/Cadastro com Email & Senha
+- [x] Persistência de sessão com Firebase Auth
+- [x] Atualização de perfil (nome e avatar do Discord)
+- [x] Proteção de rotas privadas
+- [x] Sistema de logout
+
+### Dashboard
+- [x] Listagem de eventos públicos
+- [x] Listagem de eventos privados (usuário logado)
+- [x] Ordenação por data
+- [x] Cards interativos com informações do evento
+- [x] Navbar responsiva com dropdown de usuário
+- [x] Hero section com CTA dinâmico
+
+### Infraestrutura
+- [x] Cloudflare Worker para OAuth
+- [x] Custom Token generation (Firebase Admin)
+- [x] Firestore security rules (público/privado)
+- [x] Tratamento de erros em português
+
+---
+
+## 🚧 Roadmap / Próximas Implementações
+
+### Eventos
+- [ ] Página de criação de evento (`/eventos/criar`)
+- [ ] Edição de eventos existentes
+- [ ] Exclusão de eventos
+- [ ] Upload de imagens do evento
+- [ ] Sistema de categorias/tags
+
+### Churrascômetro
+- [ ] Calculadora de carne por pessoa
+- [ ] Calculadora de bebidas
+- [ ] Lista de compras gerada automaticamente
+- [ ] Sugestão de preços por região
+
+### Sistema de Convidados
+- [ ] Envio de convites (Discord + Email)
+- [ ] RSVP (Confirmação de presença)
+- [ ] Lista de participantes
+- [ ] Sistema de "Trazer acompanhante"
+- [ ] Lembretes automáticos
+
+### Pagamentos
+- [ ] Integração com API PIX
+- [ ] Geração de QR Code
+- [ ] Divisão de custos automática
+- [ ] Rastreamento de pagamentos
+- [ ] Relatório financeiro
+
+### Discord Bot
+- [ ] Comando `/criar-churrasco`
+- [ ] Comando `/listar-eventos`
+- [ ] Comando `/confirmar-presenca`
+- [ ] Notificações de novos eventos
+- [ ] Lembretes de pagamento
+- [ ] Sistema de enquetes para escolher data/local
+
+### Melhorias UX/UI
+- [ ] Dark mode / Light mode toggle
+- [ ] Animações e transições
+- [ ] PWA (Progressive Web App)
+- [ ] Sistema de notificações em tempo real
+- [ ] Busca e filtros de eventos
+
+---
+
+## 🚀 Como Rodar
 
 ### Pré-requisitos
 
-- ✅ Conta no [Cloudflare Workers](https://workers.cloudflare.com/) (plano gratuito funciona)
-- ✅ Projeto no [Firebase](https://console.firebase.google.com/) com Firestore ativado
-- ✅ Aplicação criada no [Discord Developer Portal](https://discord.com/developers/applications)
-- ✅ Node.js v24 ou superior instalado
+- Node.js 18+ instalado
+- Conta Firebase (Authentication + Firestore)
+- Conta Cloudflare (para Workers)
+- Aplicação Discord (para OAuth)
 
-### Passo 1: Clone o Repositório
+### 1. Clone o repositório
 
 ```bash
 git clone https://github.com/BryanWalace/brasa-bot.git
 cd brasa-bot
 ```
 
-### Passo 2: Instale as Dependências
+### 2. Configure as variáveis de ambiente
+
+#### **Frontend (`web/.env.local`)**
+```env
+# Firebase
+NEXT_PUBLIC_FIREBASE_API_KEY=your-api-key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
+NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
+
+# Worker URL (produção)
+NEXT_PUBLIC_WORKER_URL=https://your-worker.workers.dev
+```
+
+#### **Wrangler Secrets (Cloudflare Worker)**
+```bash
+# Discord OAuth
+npx wrangler secret put DISCORD_CLIENT_ID
+npx wrangler secret put DISCORD_CLIENT_SECRET
+
+# Firebase Admin (para Custom Tokens)
+npx wrangler secret put FIREBASE_CLIENT_EMAIL
+npx wrangler secret put FIREBASE_PRIVATE_KEY
+```
+
+### 3. Instale as dependências
 
 ```bash
+# Frontend
+cd web
+npm install
+
+# Worker (raiz do projeto)
+cd ..
 npm install
 ```
 
-### Passo 3: Configure os Secrets do Cloudflare
+### 4. Execute em desenvolvimento
 
-O projeto usa **Wrangler Secrets** para proteger suas credenciais sensíveis:
-
+#### **Terminal 1: Frontend**
 ```bash
-# Token do bot (Discord Developer Portal > Bot > Token)
-npx wrangler secret put DISCORD_TOKEN
-
-# Chave pública do Discord (Developer Portal > General Information)
-npx wrangler secret put DISCORD_PUBLIC_KEY
-
-# ID da aplicação (Developer Portal > General Information > Application ID)
-npx wrangler secret put DISCORD_APP_ID
-
-# Configuração do Firebase (baixe o JSON no Firebase Console)
-# Cole o conteúdo inteiro do arquivo como uma string JSON
-npx wrangler secret put FIREBASE_CONFIG
+cd web
+npm run dev
+# http://localhost:3000
 ```
 
-### Passo 4: Registre os Comandos do Discord
-
-Renomeie o arquivo de exemplo e configure seus dados:
-
+#### **Terminal 2: Worker (opcional)**
 ```bash
-cp register-example.js register.js
+npx wrangler dev --port 8787
+# http://localhost:8787
 ```
 
-Edite o arquivo `register.js` e substitua:
-- `SEU_TOKEN_DO_BOT_AQUI` pelo token do bot
-- `SEU_APP_ID_AQUI` pelo ID da aplicação
+### 5. Deploy
 
-Execute o script para registrar os comandos globalmente:
-
+#### **Frontend (Vercel recomendado)**
 ```bash
-node register.js
+cd web
+npm run build
+# Deploy via Vercel CLI ou GitHub integration
 ```
 
-> **💡 Nota:** Os comandos globais podem levar até 1 hora para aparecer em novos servidores.
-
-### Passo 5: Faça o Deploy
-
+#### **Worker (Cloudflare)**
 ```bash
 npx wrangler deploy
 ```
 
-### Passo 6: Configure a URL de Interações no Discord
-
-1. Copie a URL gerada pelo deploy (ex: `https://brasa-bot.seu-usuario.workers.dev`)
-2. No Discord Developer Portal, vá em **General Information > Interactions Endpoint URL**
-3. Cole a URL e salve
-4. O Discord fará um teste de verificação automático ✅
-
-### Passo 7: Adicione o Bot ao Servidor
-
-1. No Developer Portal, vá em **OAuth2 > URL Generator**
-2. Marque os scopes: `bot` e `applications.commands`
-3. Marque as permissões: `Send Messages`, `Embed Links`, `Use Slash Commands`
-4. Copie a URL gerada e abra no navegador
-5. Selecione o servidor e autorize
-
 ---
 
-## 🔒 Segurança
-
-Este projeto implementa as melhores práticas de segurança:
-
-- ✅ **Secrets Protegidos:** Todas as chaves sensíveis são armazenadas como Wrangler Secrets, nunca em arquivos `.env`
-- ✅ **Gitignore Configurado:** Arquivos sensíveis (`register.js`, `register-global.js`, `*.log`) são ignorados pelo Git
-- ✅ **Verificação de Assinatura:** Todas as requisições do Discord são verificadas usando a chave pública ED25519
-- ✅ **Sem Exposição de Tokens:** Nenhuma credencial é commitada no repositório
-
----
-
-## 🎮 Como Usar
-
-### Criar um Evento
-
-```
-/brasa novo titulo:Churras do Fim de Ano data:20/12 às 14h valor:35.50 chave_pix:seu@email.com
-```
-
-### Confirmar Presença
-
-Clique no botão **"Vou"** no card do evento.
-
-### Pagar
-
-Clique no botão **"Pagar"** e copie o código Pix gerado. Cole no app do seu banco.
-
-### Gerenciar (Organizador)
-
-Clique no botão **"Gerenciar"** para:
-- Marcar quem já pagou (aparece 💲 na lista)
-- Cancelar/encerrar o evento
-
----
-
-## 🏗️ Estrutura do Projeto
+## 📁 Estrutura do Projeto
 
 ```
 brasa-bot/
-├── src/
-│   ├── index.js              # Entry point do Worker
-│   ├── core/
-│   │   └── security.js       # Verificação de assinatura do Discord
-│   ├── database/
-│   │   └── firebase.js       # Funções do Firestore
-│   ├── services/
-│   │   └── pix.js            # Geração de código Pix (Padrão EMV)
-│   └── locales/              # Internacionalização (pt-BR, en-US)
-├── register-example.js       # Template para registro de comandos
-├── wrangler.toml             # Configuração do Cloudflare Workers
-├── package.json              # Dependências do projeto
-├── LICENSE                   # Licença MIT
-└── README.md                 # Este arquivo
+├── web/                          # Next.js Frontend
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.js          # Home / Dashboard
+│   │   │   ├── page.module.css
+│   │   │   └── login/
+│   │   │       ├── page.js      # Login/Signup
+│   │   │       └── login.module.css
+│   │   └── firebase/
+│   │       └── client.js        # Firebase config
+│   ├── .env.local               # Environment variables
+│   └── package.json
+│
+├── src/                         # Cloudflare Worker
+│   ├── index.js                 # Worker main file (OAuth bridge)
+│   ├── commands/                # Discord bot commands
+│   ├── core/                    # Core bot logic
+│   ├── database/                # DB helpers
+│   └── services/                # External services
+│
+├── wrangler.toml                # Worker configuration
+├── package.json                 # Worker dependencies
+├── .gitignore
+└── README.md
 ```
 
 ---
 
-## 🤝 Como Contribuir
+## 🔐 Segurança
 
-Contribuições são muito bem-vindas! Veja como você pode ajudar:
+### Implementado
+- ✅ Secrets gerenciados via Wrangler (não comitados)
+- ✅ `.env.local` no `.gitignore`
+- ✅ Firebase Security Rules (público/privado)
+- ✅ Validação de Custom Tokens (RS256)
+- ✅ CORS configurado no Worker
+- ✅ Rate limiting no Worker
 
-1. Faça um fork do projeto
+### Recomendações
+- 🔒 Use Firebase Security Rules rigorosas em produção
+- 🔒 Configure domínio customizado para o Worker
+- 🔒 Ative 2FA em todas as contas (Firebase, Cloudflare, Discord)
+- 🔒 Revise permissões da Service Account do Firebase
+
+---
+
+## 🤝 Contribuindo
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Fork o projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'feat: adiciona nova funcionalidade'`)
+3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
 4. Push para a branch (`git push origin feature/MinhaFeature`)
 5. Abra um Pull Request
 
-### 📝 Padrão de Commits
+---
 
-Usamos [Conventional Commits](https://www.conventionalcommits.org/):
+## 📝 Licença
 
-- `feat:` Nova funcionalidade
-- `fix:` Correção de bug
-- `docs:` Mudanças na documentação
-- `style:` Formatação de código
-- `refactor:` Refatoração sem mudança de comportamento
-- `test:` Adição ou correção de testes
-- `chore:` Tarefas de manutenção
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
 
 ---
 
-## 📚 Recursos Úteis
+## 👨‍💻 Autor
 
-- [Documentação do Discord Interactions](https://discord.com/developers/docs/interactions/overview)
-- [Cloudflare Workers Docs](https://developers.cloudflare.com/workers/)
-- [Firebase Firestore Lite](https://firebase.google.com/docs/firestore)
-- [Padrão PIX EMV](https://www.bcb.gov.br/estabilidadefinanceira/pix)
+**Bryan Wallace**
+- GitHub: [@BryanWalace](https://github.com/BryanWalace)
 
 ---
 
-## 🚀 Roadmap (Futuro do Projeto)
+## 🙏 Agradecimentos
 
-Estamos constantemente trabalhando para melhorar o Brasa Bot. Aqui estão algumas funcionalidades planejadas:
-
-### 🌍 Internacionalização (i18n)
-- Suporte para múltiplos idiomas (Inglês, Espanhol, Português)
-- Detecção automática do locale do servidor Discord
-- Sistema de tradução dinâmica para comandos e mensagens
-- Contribuições da comunidade para novos idiomas
-
-### 📊 Web Dashboard
-- Integração com Next.js para painel administrativo web
-- Visualização gráfica dos eventos em tempo real
-- Gestão de caixa com relatórios financeiros detalhados
-- Gráficos de participação e histórico de pagamentos
-- Exportação de dados em CSV/Excel
-
-### 🎯 Novas Funcionalidades Sociais
-- **Sistema de Enquetes:** Votação para escolher o prato principal do churrasco
-- **Integração com Spotify:** Criação colaborativa de playlist para o evento
-- **Lembretes Automáticos:** Notificações 24h antes do evento
-- **Galeria de Fotos:** Upload e compartilhamento de fotos do evento
-- **Sistema de Avaliação:** Feedback pós-evento para melhorias
-
-### 🔧 Melhorias Técnicas
-- Migração para TypeScript para maior segurança de tipos
-- Testes automatizados (Jest + Vitest)
-- CI/CD com GitHub Actions
-- Monitoramento com Sentry e Analytics
-- Cache inteligente para reduzir chamadas ao Firebase
-
-**Quer contribuir com alguma dessas features?** Abra uma issue ou PR! 🚀
+- Next.js Team pelo framework incrível
+- Firebase pela auth simplificada
+- Cloudflare pelo Workers gratuito
+- Discord pela API robusta
 
 ---
 
-## 📄 Licença
-
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
-
----
-
-<div align="center">
-
-**Feito com ❤️ e muito 🔥 por [Bryan Walace](https://github.com/BryanWalace)**
-
-Se este projeto te ajudou, considere dar uma ⭐ no repositório!
-
-</div>
+**🔥 Feito com muito churrasco e código!**
